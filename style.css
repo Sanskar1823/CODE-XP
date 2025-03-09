@@ -1,71 +1,87 @@
-/* General Styling */
-body {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Poppins', sans-serif;
-    background: linear-gradient(120deg, #1a1a40, #4e54c8, #8f94fb);
-    color: white;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
+const validUser = { username: 'admin', password: 'password' };
+let userPoints = 0;
+
+// Welcome Page Navigation
+function showLogin() {
+    document.getElementById('welcome-container').classList.add('hidden');
+    document.getElementById('login-container').classList.remove('hidden');
 }
 
-/* Containers */
-.container {
-    text-align: center;
-    padding: 40px;
-    border-radius: 20px;
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
-    backdrop-filter: blur(12px);
-    animation: fadeIn 1s ease-in-out;
-}
-
-/* Logo */
-.logo {
-    width: 120px;
-    margin-bottom: 20px;
-}
-
-/* Hidden Elements */
-.hidden {
-    display: none;
-}
-
-/* Inputs and Buttons */
-input, button {
-    padding: 12px 24px;
-    margin: 10px;
-    border-radius: 8px;
-    border: none;
-    outline: none;
-}
-
-button {
-    background: #ff7eb3;
-    color: white;
-    cursor: pointer;
-    transition: 0.3s;
-}
-
-button:hover {
-    background: #ff4a85;
-}
-
-/* Chatbox */
-#chat-box {
-    height: 200px;
-    overflow-y: auto;
-    margin-bottom: 10px;
-}
-
-/* Animations */
-@keyframes fadeIn {
-    from {
-        opacity: 0;
+// Login Functionality
+document.getElementById('loginForm').addEventListener('submit', function (event) {
+    event.preventDefault();
+    const username = document.getElementById('username').value;
+    const password = document.getElementById('password').value;
+    if (username === validUser.username && password === validUser.password) {
+        document.getElementById('userName').textContent = username;
+        showDashboard();
+    } else {
+        document.getElementById('error-message').textContent = 'Invalid username or password!';
     }
-    to {
-        opacity: 1;
-    }
+});
+
+function showDashboard() {
+    document.getElementById('login-container').classList.add('hidden');
+    document.getElementById('dashboard-container').classList.remove('hidden');
+    updatePoints();
+}
+
+// Logout
+function logout() {
+    location.reload();
+}
+
+// Vocabulary Quiz
+function startLesson() {
+    navigate('dashboard-container', 'lesson-container');
+}
+
+function checkAnswer(answer) {
+    if (answer === 'Hello') {
+        alert('Correct!');
+        userPoints += 10;
+    } else alert('Try again!');
+    updatePoints();
+}
+
+// Programming Quiz
+function startProgrammingQuiz() {
+    navigate('dashboard-container', 'programming-container');
+}
+
+function checkProgrammingAnswer(option) {
+    if (option === 'Hello, CodeXP!') {
+        alert('Correct!');
+        userPoints += 20;
+    } else alert('Wrong Answer!');
+    updatePoints();
+}
+
+// AI Chatbot
+function startChatbot() {
+    navigate('dashboard-container', 'chatbot-container');
+}
+
+function sendMessage() {
+    const userInput = document.getElementById('user-input').value;
+    const chatBox = document.getElementById('chat-box');
+    chatBox.innerHTML += `<p>User: ${userInput}</p>`;
+    chatBox.innerHTML += `<p>Bot: ${simpleAI(userInput)}</p>`;
+    document.getElementById('user-input').value = '';
+}
+
+function simpleAI(input) {
+    if (input.toLowerCase().includes("hello")) return "Hi there! How can I help you?";
+    return "I'm still learning. Try asking something else!";
+}
+
+// Navigation Helper
+function navigate(hide, show) {
+    document.getElementById(hide).classList.add('hidden');
+    document.getElementById(show).classList.remove('hidden');
+}
+
+// Update Points
+function updatePoints() {
+    document.getElementById('user-points').textContent = userPoints;
 }
