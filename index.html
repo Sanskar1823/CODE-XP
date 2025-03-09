@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>CodeXP - Language Learning App</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+    <!-- Welcome Page -->
+    <div id="welcome-container" class="container">
+        <img src="https://cdn-icons-png.flaticon.com/512/3335/3335925.png" alt="Rocketship Logo" class="logo">
+        <h1>Welcome to CodeXP 🚀</h1>
+        <p>Explore and master languages with fun, AI, and programming challenges!</p>
+        <button onclick="showLogin()">Get Started</button>
+    </div>
+
+    <!-- Login Page -->
+    <div id="login-container" class="container hidden">
+        <h2>Login to CodeXP</h2>
+        <form id="loginForm">
+            <input type="text" id="username" placeholder="Username" required>
+            <input type="password" id="password" placeholder="Password" required>
+            <button type="submit">Login</button>
+            <p id="error-message"></p>
+        </form>
+    </div>
+
+    <!-- Dashboard -->
+    <div id="dashboard-container" class="container hidden">
+        <h1>Hello, <span id="userName"></span> 👋</h1>
+        <p>Your Points: <span id="user-points">0</span></p>
+        <button onclick="startProgrammingQuiz()">💻 Programming Test</button>
+        <button onclick="startChatbot()">🤖 AI Chatbot</button>
+        <button onclick="logout()">Logout</button>
+    </div>
+
+    <!-- Programming Quiz -->
+    <div id="programming-container" class="container hidden">
+        <h2>Programming Quiz</h2>
+        <p id="prog-question">Loading question...</p>
+        <div id="options-container"></div>
+        <p id="prog-feedback"></p>
+        <button onclick="backToDashboard()">Back to Dashboard</button>
+    </div>
+
+    <!-- AI Chatbot -->
+    <div id="chatbot-container" class="container hidden">
+        <h2>AI Chatbot - Ask Anything!</h2>
+        <div id="chat-box"></div>
+        <input type="text" id="user-input" placeholder="Ask me a question..." />
+        <button onclick="sendMessage()">Send</button>
+        <button onclick="backToDashboard()">Back to Dashboard</button>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
