@@ -11,9 +11,9 @@
 
     <!-- Welcome Page -->
     <div id="welcome-container" class="container">
-        <img src="https://cdn-icons-png.flaticon.com/512/3335/3335925.png" alt="Rocketship Logo" class="logo">
-        <h1>Welcome to CodeXP 🚀</h1>
-        <p>Explore and master languages with fun, AI, and programming challenges!</p>
+        <img src="https://via.placeholder.com/150" alt="CodeXP Logo" class="logo">
+        <h1>Welcome to CodeXP</h1>
+        <p>Learn languages and programming interactively with AI!</p>
         <button onclick="showLogin()">Get Started</button>
     </div>
 
@@ -32,16 +32,38 @@
     <div id="dashboard-container" class="container hidden">
         <h1>Hello, <span id="userName"></span> 👋</h1>
         <p>Your Points: <span id="user-points">0</span></p>
+        <button onclick="startLesson()">📚 Vocabulary Quiz</button>
         <button onclick="startProgrammingQuiz()">💻 Programming Test</button>
         <button onclick="startChatbot()">🤖 AI Chatbot</button>
         <button onclick="logout()">Logout</button>
     </div>
 
+    <!-- Vocabulary Lesson -->
+    <div id="lesson-container" class="container hidden">
+        <h2>Vocabulary Quiz</h2>
+        <p id="question">What is 'Hola' in English?</p>
+        <button onclick="checkAnswer('Hello')">Hello</button>
+        <button onclick="checkAnswer('Goodbye')">Goodbye</button>
+        <button onclick="checkAnswer('Thanks')">Thanks</button>
+        <p id="feedback"></p>
+        <button onclick="backToDashboard()">Back to Dashboard</button>
+    </div>
+
     <!-- Programming Quiz -->
     <div id="programming-container" class="container hidden">
         <h2>Programming Quiz</h2>
-        <p id="prog-question">Loading question...</p>
-        <div id="options-container"></div>
+        <p id="prog-question">What does this C++ code output?</p>
+        <pre id="code-snippet">
+            #include &lt;iostream&gt;
+            using namespace std;
+            int main() {
+                cout << "Hello, CodeXP!";
+                return 0;
+            }
+        </pre>
+        <button onclick="checkProgrammingAnswer('Hello, CodeXP!')">Hello, CodeXP!</button>
+        <button onclick="checkProgrammingAnswer('Error')">Error</button>
+        <button onclick="checkProgrammingAnswer('CodeXP')">CodeXP</button>
         <p id="prog-feedback"></p>
         <button onclick="backToDashboard()">Back to Dashboard</button>
     </div>
