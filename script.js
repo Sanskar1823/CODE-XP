@@ -1,114 +1,71 @@
-const validUser = { username: 'admin', password: 'password' };
-let userPoints = 0;
+/* General Styling */
+body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, #4e54c8, #8f94fb);
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
 
-// Programming Quiz Data
-const programmingQuestions = [
-    {
-        question: "What does 'cout' do in C++?",
-        options: ["Outputs data", "Inputs data", "Loops data"],
-        answer: "Outputs data"
-    },
-    {
-        question: "What keyword is used to define a function in Python?",
-        options: ["func", "def", "lambda"],
-        answer: "def"
-    },
-    {
-        question: "Which Java keyword is used to inherit a class?",
-        options: ["import", "inherit", "extends"],
-        answer: "extends"
-    },
-    {
-        question: "What will '5 == '5'' return in JavaScript?",
-        options: ["true", "false", "undefined"],
-        answer: "false"
+/* Containers */
+.container {
+    text-align: center;
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(10px);
+    animation: fadeIn 1s ease-in-out;
+}
+
+/* Logo */
+.logo {
+    width: 150px;
+    margin-bottom: 20px;
+}
+
+/* Hidden Elements */
+.hidden {
+    display: none;
+}
+
+/* Inputs and Buttons */
+input, button {
+    padding: 10px 20px;
+    margin: 10px;
+    border-radius: 8px;
+    border: none;
+    outline: none;
+}
+
+button {
+    background: #ff7eb3;
+    color: white;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+button:hover {
+    background: #ff6b9e;
+}
+
+/* Chatbox */
+#chat-box {
+    height: 200px;
+    overflow-y: auto;
+    margin-bottom: 10px;
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
     }
-];
-
-// Navigation Helpers
-function showLogin() {
-    document.getElementById('welcome-container').classList.add('hidden');
-    document.getElementById('login-container').classList.remove('hidden');
-}
-
-function backToDashboard() {
-    document.querySelectorAll('.container').forEach(container => {
-        container.classList.add('hidden');
-    });
-    document.getElementById('dashboard-container').classList.remove('hidden');
-    updatePoints();
-}
-
-// Login System
-document.getElementById('loginForm').addEventListener('submit', function (event) {
-    event.preventDefault();
-    const username = document.getElementById('username').value;
-    const password = document.getElementById('password').value;
-    if (username === validUser.username && password === validUser.password) {
-        document.getElementById('userName').textContent = username;
-        backToDashboard();
-    } else {
-        document.getElementById('error-message').textContent = 'Invalid username or password!';
+    to {
+        opacity: 1;
     }
-});
-
-function logout() {
-    location.reload();
-}
-
-// Programming Quiz
-let currentQuestion = 0;
-
-function startProgrammingQuiz() {
-    backToDashboard();
-    document.getElementById('programming-container').classList.remove('hidden');
-    loadQuestion();
-}
-
-function loadQuestion() {
-    const questionData = programmingQuestions[currentQuestion];
-    document.getElementById('prog-question').textContent = questionData.question;
-    const optionsContainer = document.getElementById('options-container');
-    optionsContainer.innerHTML = "";
-    questionData.options.forEach(option => {
-        const btn = document.createElement('button');
-        btn.textContent = option;
-        btn.onclick = () => checkAnswer(option);
-        optionsContainer.appendChild(btn);
-    });
-}
-
-function checkAnswer(option) {
-    if (option === programmingQuestions[currentQuestion].answer) {
-        alert('✅ Correct!');
-        userPoints += 20;
-    } else {
-        alert('❌ Wrong!');
-    }
-    currentQuestion++;
-    if (currentQuestion < programmingQuestions.length) {
-        loadQuestion();
-    } else {
-        backToDashboard();
-    }
-    updatePoints();
-}
-
-// AI Chatbot
-function startChatbot() {
-    backToDashboard();
-    document.getElementById('chatbot-container').classList.remove('hidden');
-}
-
-function sendMessage() {
-    const userInput = document.getElementById('user-input').value;
-    const chatBox = document.getElementById('chat-box');
-    chatBox.innerHTML += `<p>User: ${userInput}</p>`;
-    chatBox.innerHTML += `<p>Bot: I'm learning! Ask something else.</p>`;
-    document.getElementById('user-input').value = '';
-}
-
-// Update Points
-function updatePoints() {
-    document.getElementById('user-points').textContent = userPoints;
 }
